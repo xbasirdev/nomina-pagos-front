@@ -1,24 +1,21 @@
+<app-file-upload></app-file-upload>
 <hr>
 <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">id</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Genero</th>
-        <th scope="col">Año</th>
-        <th scope="col">Duracion</th>
+        <th scope="col">Filename</th>
+        <th scope="col">User_id</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movie of movies">
-        <td>{{movie.id}}</td>
-        <td>{{movie.name}}</td>
-        <td>{{movie.genre}}</td>
-        <td>{{movie.year}}</td>
-        <td>{{movie.duration}}</td>
-        <td><a class="btn btn-primary btn-sm" routerLink="/form/{{movie.id}}">Ver / Editar</a>
-          <a class="btn btn-danger btn-sm" (click)="delete(movie.id)">Eliminar</a>
+      <tr *ngFor="let file of files">
+        <td>{{file.id}}</td>
+        <td><a href="http://127.0.0.1:8000/files/{{file.filename}}" target="_blank">{{file.filename}}</a></td>
+        <td>{{file.user_id}}</td>
+        <td><a class="btn btn-primary btn-sm" routerLink="/form/{{file.id}}">Ver / Editar</a>
+          <a class="btn btn-danger btn-sm" (click)="delete(file.id)">Eliminar</a>
         </td>
       </tr>
     </tbody>

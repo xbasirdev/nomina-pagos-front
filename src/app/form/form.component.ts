@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../interfaces/movies';
-import { MoviesService } from '../services/movies.service';
+import { File } from '../interfaces/files';
+import { FilesService } from '../services/files.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,23 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  movie: Movie = {
-    name: null,
-    year: null,
-    description: null,
-    duration: null,
-    genre: null
+  file: File = {
+    user_id: null,
+    filenames: null,
+    filename: null
   };
   id: any;
   editing: boolean = false;
-  movies: Movie[];
-  constructor(private moviesService: MoviesService, private activatedRoute: ActivatedRoute) {
+  files: File[];
+  constructor(private filesService: FilesService, private activatedRoute: ActivatedRoute) {
      this.id = this.activatedRoute.snapshot.params['id'];
      if(this.id){
         this.editing = true;
-        this.moviesService.get().subscribe( (data: Movie[]) => {
-          this.movies = data;
-          this.movie = this.movies.find( (m) => {return m.id == this.id })
+        this.filesService.get().subscribe( (data: File[]) => {
+          this.files = data;
+          this.file = this.files.find( (m) => {return m.id == this.id })
         })
      }else{
        this.editing = false;
@@ -35,17 +33,19 @@ export class FormComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveMovie(){
+  
+
+  saveFile(){
     if(this.editing){
-      this.moviesService.put(this.movie).subscribe( (data) => {
-        alert('Pelicula actualizada');
+      this.filesService.put(this.file).subscribe( (data) => {
+        alert('registro actualizada');
       }, (error) => {
         console.log(error);
         alert('Ocurrio un error');
       })
     }else {
-      this.moviesService.save(this.movie).subscribe( (data) => {
-        alert('Pelicula guardada');
+      this.filesService.save(this.file).subscribe( (data) => {
+        console.log(data);
       }, (error) => {
         console.log(error);
         alert('Ocurrio un error');

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from '../services/movies.service';
-import { Movie } from '../interfaces/movies';
+import { FilesService } from '../services/files.service';
+import { File } from '../interfaces/files';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +8,17 @@ import { Movie } from '../interfaces/movies';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  movies: Movie[];
-  constructor(private movieService: MoviesService) { 
-    this.getMovies();
+  files: File[];
+  constructor(private fileService: FilesService) { 
+    this.getFiles();
   }
 
   ngOnInit() {
   }
 
-  getMovies(){
-    this.movieService.get().subscribe((data: Movie[]) => {
-      this.movies = data;
+  getFiles(){
+    this.fileService.get().subscribe((data: File[]) => {
+      this.files = data;
     }, (error)=>{
       console.log(error);
       alert('Ocurrio un error');
@@ -27,10 +27,10 @@ export class HomeComponent implements OnInit {
 
   delete(id){
     if(confirm('Seguro que desea eliminarlo?')){
-      this.movieService.delete(id).subscribe( (data) => {
+      this.fileService.delete(id).subscribe( (data) => {
         alert('eliminado con exito');
         console.log(data);
-        this.getMovies();
+        this.getFiles();
       }, (error) => {
         console.log(error);
       });

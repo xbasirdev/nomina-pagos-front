@@ -24,3 +24,10 @@ export class MoviesService {
     return this.httpClient.delete(this.API_ENDPOINT + '/movies/' + id);
   }
 }
+
+
+
+
+
+
+
