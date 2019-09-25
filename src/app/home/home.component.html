@@ -14,7 +14,7 @@
         <td>{{file.id}}</td>
         <td><a href="http://127.0.0.1:8000/files/{{file.filename}}" target="_blank">{{file.filename}}</a></td>
         <td>{{file.user_id}}</td>
-        <td><a class="btn btn-primary btn-sm" routerLink="/form/{{file.id}}">Ver / Editar</a>
+        <td>
           <a class="btn btn-danger btn-sm" (click)="delete(file.id)">Eliminar</a>
         </td>
       </tr>
